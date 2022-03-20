@@ -26,7 +26,7 @@ public class AjaxBorderSearch implements Command {
 		List<BorderVO> list = borderDao.borderSelectSearchList(key, val);
 		String data = null;
 		try {
-			data = new ObjectMapper().writeValueAsString(list);  //json 객체로 변환 한다.11
+			data = new ObjectMapper().writeValueAsString(list);  //json 객체로 변환 한다.111111
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
