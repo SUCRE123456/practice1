@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.micol.prj.member.service.MemberMapper">
+	<select id="selectMemberList" resultType="co.micol.prj.member.service.MemberVO">
+		select * from member
+	</select>
+	<select id="selectMember" parameterType="co.micol.prj.member.service.MemberVO"
+		resultType="co.micol.prj.member.service.MemberVO">
+		select * from member where id = #{id}
+		<if test="password != null">and password = #{password}</if> 
+		
+	</select>
+	
+	<insert id ="insertMember" parameterType="co.micol.prj.member.service.MemberVO">
+		insert into member
+		values(#{id},#{password},#{name},#{tel},#{address},'USER')
+	</insert>
+	
+	<update id ="updateMember" parameterType="co.micol.prj.member.service.MemberVO">
+		update member
+		<set>
+			<if test="password != null">set password = #{password},</if>
+			<if test="name != null">set name = #{name},</if>
+			<if test="tel != null">set tel = #{tel},</if>
+			<if test="address != null">set address = #{address},</if>
+			<if test="author != null">set author = #{author},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id ="deleteMember" parameterType="co.micol.prj.member.service.MemberVO">
+		delete from member where id = #{id}
+	</delete>
+	
+	<select id="isIdCheck" parameterType="String" resultType="boolean">
+	select case when count(id) = 1 then 0 else 1 end as id
+	from member where id = #{str}
+	</select>
+	
+</mapper>
